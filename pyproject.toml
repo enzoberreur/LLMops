@@ -9,4 +9,8 @@ dependencies = [
     "google-cloud-bigquery>=3.38.0",
     "google-cloud-storage>=2.19.0",
     "python-dotenv",
+    "pandas",
+    "datasets>=4.2.0",
+    "gcsfs>=2025.9.0",
+    "dotenv>=0.9.9",
 ]
