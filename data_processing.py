@@ -30,7 +30,10 @@ dataset = hf_dataset.rename_column("sentence", "prompt")
 dataset = dataset.rename_column("translation_extra", "completion")
 dataset = dataset.map(format_dataset)
 dataset = dataset.remove_columns(['prompt', 'completion', 'translation'])
-messages = dataset[0]['messages']
-messages
 
-print(messages)
+split = dataset.train_test_split(test_size=0.2, seed=42)
+train_dataset = split['train']
+test_dataset = split['test']
+
+train_dataset.to_csv("train.csv")
+test_dataset.to_csv("test.csv")
