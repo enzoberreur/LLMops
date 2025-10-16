@@ -305,6 +305,30 @@ wheels = [
 ]
 
 [[package]]
+name = "click"
+version = "8.1.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b9/2e/0090cbf739cee7d23781ad4b89a9894a41538e4fcf4c31dcdd705b78eb8b/click-8.1.8.tar.gz", hash = "sha256:ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a", size = 226593, upload-time = "2024-12-21T18:38:44.339Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/d4/7ebdbd03970677812aac39c869717059dbb71a4cfc033ca6e5221787892c/click-8.1.8-py3-none-any.whl", hash = "sha256:63c132bbbed01578a06712a2d1f497bb62d9c1c0d329b7903a866228027263b2", size = 98188, upload-time = "2024-12-21T18:38:41.666Z" },
+]
+
+[[package]]
+name = "click-option-group"
+version = "0.5.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b9/9f/1f917934da4e07ae7715a982347e3c2179556d8a58d1108c5da3e8f09c76/click_option_group-0.5.7.tar.gz", hash = "sha256:8dc780be038712fc12c9fecb3db4fe49e0d0723f9c171d7cda85c20369be693c", size = 22110, upload-time = "2025-03-24T13:24:55.897Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/93/27/bf74dc1494625c3b14dbcdb93740defd7b8c58dae3736be8d264f2a643fb/click_option_group-0.5.7-py3-none-any.whl", hash = "sha256:96b9f52f397ef4d916f81929bd6c1f85e89046c7a401a64e72a61ae74ad35c24", size = 11483, upload-time = "2025-03-24T13:24:54.611Z" },
+]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -996,6 +1020,76 @@ wheels = [
 ]
 
 [[package]]
+name = "kfp"
+version = "2.14.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "click-option-group" },
+    { name = "docstring-parser" },
+    { name = "google-api-core" },
+    { name = "google-auth" },
+    { name = "google-cloud-storage" },
+    { name = "kfp-pipeline-spec" },
+    { name = "kfp-server-api" },
+    { name = "kubernetes" },
+    { name = "protobuf" },
+    { name = "pyyaml" },
+    { name = "requests-toolbelt" },
+    { name = "tabulate" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3b/c1/d01724ccb7faaf3ecf2a8109de1d7eebb0afa1f292d6dcd650755b990d59/kfp-2.14.6.tar.gz", hash = "sha256:9e94ff2e74465c27393736c295b6dc478b29cf9d0264950019b5167c7c53fd2e", size = 274267, upload-time = "2025-10-13T20:08:46.072Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1f/46/789f883750b0f6c321450832e2f07203139716cb9422cad6f3d286298915/kfp-2.14.6-py3-none-any.whl", hash = "sha256:2d76aff91d8461e837989c2dc966c9dddaba7fcc37b7b8be4b0564282b1f613d", size = 374048, upload-time = "2025-10-13T20:08:44.275Z" },
+]
+
+[[package]]
+name = "kfp-pipeline-spec"
+version = "2.14.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "protobuf" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7b/be/a8aa41bbe65c0578f141f615f30829e68bdc087542248d20a84316252228/kfp_pipeline_spec-2.14.6.tar.gz", hash = "sha256:a4943b0bdf6d991db35ca3a261caf77997676512970959bf9909742df58e2a87", size = 10255, upload-time = "2025-10-13T20:06:29.544Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/56/c7/a331cdb987d5c1764c309e6c9f596a695cfd8fe86ea95fc8a9fbc052cf52/kfp_pipeline_spec-2.14.6-py3-none-any.whl", hash = "sha256:82cbad2976f248f7049be37d241f1e47ecb3d99e720dfd0cab3e0881be458516", size = 9550, upload-time = "2025-10-13T20:06:28.544Z" },
+]
+
+[[package]]
+name = "kfp-server-api"
+version = "2.14.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "python-dateutil" },
+    { name = "six" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7b/9d/47f38ed0914bbf6c7e70693b805d822b0848d2f79cce0aa2addb2a7b2f67/kfp-server-api-2.14.6.tar.gz", hash = "sha256:eabf673f384186968d88cff9674cd39c655537aad1abacda78086575924d6bfc", size = 64327, upload-time = "2025-10-15T15:43:52.999Z" }
+
+[[package]]
+name = "kubernetes"
+version = "30.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "google-auth" },
+    { name = "oauthlib" },
+    { name = "python-dateutil" },
+    { name = "pyyaml" },
+    { name = "requests" },
+    { name = "requests-oauthlib" },
+    { name = "six" },
+    { name = "urllib3" },
+    { name = "websocket-client" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/82/3c/9f29f6cab7f35df8e54f019e5719465fa97b877be2454e99f989270b4f34/kubernetes-30.1.0.tar.gz", hash = "sha256:41e4c77af9f28e7a6c314e3bd06a8c6229ddd787cad684e0ab9f69b498e98ebc", size = 887810, upload-time = "2024-06-06T15:58:30.031Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/62/a1/2027ddede72d33be2effc087580aeba07e733a7360780ae87226f1f91bd8/kubernetes-30.1.0-py2.py3-none-any.whl", hash = "sha256:e212e8b7579031dd2e512168b617373bc1e03888d41ac4e04039240a292d478d", size = 1706042, upload-time = "2024-06-06T15:58:27.13Z" },
+]
+
+[[package]]
 name = "llmops"
 version = "0.1.0"
 source = { virtual = "." }
@@ -1006,6 +1100,7 @@ dependencies = [
     { name = "google-cloud-aiplatform" },
     { name = "google-cloud-bigquery" },
     { name = "google-cloud-storage" },
+    { name = "kfp" },
     { name = "pandas" },
     { name = "python-dotenv" },
 ]
@@ -1018,6 +1113,7 @@ requires-dist = [
     { name = "google-cloud-aiplatform", specifier = ">=1.120.0" },
     { name = "google-cloud-bigquery", specifier = ">=3.38.0" },
     { name = "google-cloud-storage", specifier = ">=2.19.0" },
+    { name = "kfp", specifier = ">=2.14.6" },
     { name = "pandas" },
     { name = "python-dotenv" },
 ]
@@ -1991,6 +2087,18 @@ wheels = [
 ]
 
 [[package]]
+name = "requests-toolbelt"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f3/61/d7545dafb7ac2230c70d38d31cbfe4cc64f7144dc41f6e4e4b78ecd9f5bb/requests-toolbelt-1.0.0.tar.gz", hash = "sha256:7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6", size = 206888, upload-time = "2023-05-01T04:11:33.229Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/51/d4db610ef29373b879047326cbf6fa98b6c1969d6f6dc423279de2b1be2c/requests_toolbelt-1.0.0-py2.py3-none-any.whl", hash = "sha256:cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06", size = 54481, upload-time = "2023-05-01T04:11:28.427Z" },
+]
+
+[[package]]
 name = "rsa"
 version = "4.9.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2140,6 +2248,15 @@ wheels = [
 ]
 
 [[package]]
+name = "tabulate"
+version = "0.9.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ec/fe/802052aecb21e3797b8f7902564ab6ea0d60ff8ca23952079064155d1ae1/tabulate-0.9.0.tar.gz", hash = "sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c", size = 81090, upload-time = "2022-10-06T17:21:48.54Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/40/44/4a5f08c96eb108af5cb50b41f76142f0afa346dfa99d5296fe7202a11854/tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f", size = 35252, upload-time = "2022-10-06T17:21:44.262Z" },
+]
+
+[[package]]
 name = "tenacity"
 version = "9.1.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2197,6 +2314,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz", hash = "sha256:3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760", size = 393185, upload-time = "2025-06-18T14:07:41.644Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a7/c2/fe1e52489ae3122415c51f387e221dd0773709bad6c6cdaa599e8a2c5185/urllib3-2.5.0-py3-none-any.whl", hash = "sha256:e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc", size = 129795, upload-time = "2025-06-18T14:07:40.39Z" },
+]
+
+[[package]]
+name = "websocket-client"
+version = "1.9.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2c/41/aa4bf9664e4cda14c3b39865b12251e8e7d239f4cd0e3cc1b6c2ccde25c1/websocket_client-1.9.0.tar.gz", hash = "sha256:9e813624b6eb619999a97dc7958469217c3176312b3a16a4bd1bc7e08a46ec98", size = 70576, upload-time = "2025-10-07T21:16:36.495Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/34/db/b10e48aa8fff7407e67470363eac595018441cf32d5e1001567a7aeba5d2/websocket_client-1.9.0-py3-none-any.whl", hash = "sha256:af248a825037ef591efbf6ed20cc5faa03d3b47b9e5a2230a529eeee1c1fc3ef", size = 82616, upload-time = "2025-10-07T21:16:34.951Z" },
 ]
 
 [[package]]
