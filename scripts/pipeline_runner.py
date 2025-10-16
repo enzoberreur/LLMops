@@ -34,6 +34,5 @@ job = aiplatform.PipelineJob(
     enable_caching=False,
 )
 
-job.run(service_account="vertex-ai-runner@lunar-byte-475017-r8.iam.gserviceaccount.com", sync=True)
-
-print(f"Pipeline lancé ! Suivez ce lien pour voir l'exécution : {job.dashboard_uri}")
+job.submit(service_account="vertex-ai-runner@lunar-byte-475017-r8.iam.gserviceaccount.com")
+print(f"Pipeline lancé !")
