@@ -107,67 +107,120 @@ The system recognizes **12 distinct emotional states**, each mapped to curated a
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 - A GCP project with Vertex AI enabled
 
-### Installation
+### Step 1: Installation
 
-1. **Install dependencies:**
-   ```bash
-   uv sync
-   ```
-
-2. **Authenticate with Google Cloud:**
-   ```bash
-   gcloud auth login
-   gcloud auth application-default login
-   gcloud config set project YOUR_PROJECT_ID
-   ```
-
-3. **Enable required GCP APIs:**
-   ```bash
-   gcloud services enable aiplatform.googleapis.com
-   gcloud services enable storage-component.googleapis.com
-   gcloud services enable cloudresourcemanager.googleapis.com
-   ```
-
-4. **Configure environment variables:**
-   - Copy `.env.example` to `.env`
-   - Fill in your project-specific values (project ID, region, bucket names, endpoint ID)
-   - Upload mood datasets to your GCS bucket
-
-### Running the Pipeline
-
-To execute the full training pipeline:
-
+**Install dependencies and create virtual environment:**
 ```bash
-export $(cat .env | xargs)
-PYTHONPATH=. uv run python scripts/pipeline_runner.py
+uv venv
+uv sync
 ```
 
-This will orchestrate the complete workflow: data transformation → fine-tuning → inference → evaluation.
+**Activate the virtual environment:**
+```bash
+source .venv/bin/activate
+```
 
-### Deploying the Model
+### Step 2: GCP Authentication
 
-1. **Register the model with custom handler:**
+**Authenticate with Google Cloud:**
+```bash
+gcloud auth login
+gcloud auth application-default login
+gcloud config set project YOUR_PROJECT_ID
+```
+
+**Enable required GCP APIs:**
+```bash
+gcloud services enable aiplatform.googleapis.com
+gcloud services enable storage-component.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com
+```
+
+### Step 3: Environment Configuration
+
+1. **Copy the example environment file:**
    ```bash
-   PYTHONPATH=. uv run python scripts/register_model_with_custom_handler.py
+   cp .env.example .env
    ```
 
-2. **Deploy to Vertex AI endpoint:**
+2. **Edit `.env` and fill in your values:**
+   - `GCP_PROJECT_ID`: Your GCP project ID
+   - `GCP_PROJECT_NUMBER`: Your GCP project number
+   - `GCP_BUCKET_NAME`: Your GCS bucket name
+   - `GCP_REGION`: Deployment region (e.g., `europe-west2`)
+   - Upload mood datasets (`mood_samples.csv` and `mood_catalog.csv`) to your GCS bucket
+
+3. **Load environment variables:**
    ```bash
-   PYTHONPATH=. uv run python scripts/deploy_model.py
+   export $(cat .env | xargs)
    ```
 
-3. **Check deployment status:**
-   ```bash
-   PYTHONPATH=. uv run python scripts/check_endpoint_status.py
-   ```
+### Step 4: Training Pipeline (Optional)
 
-### Testing the Endpoint
-
-Once deployed (deployment takes ~10-15 minutes), test with:
+If you need to train a new model from scratch:
 
 ```bash
+source .venv/bin/activate
 export $(cat .env | xargs)
-PYTHONPATH=. uv run python scripts/test_endpoint.py YOUR_ENDPOINT_ID \
+PYTHONPATH=. python scripts/pipeline_runner.py
+```
+
+This orchestrates: data transformation → fine-tuning → inference → evaluation (takes ~2-3 hours with GPU).
+
+### Step 5: Model Deployment
+
+**A. List available models in Vertex AI:**
+```bash
+source .venv/bin/activate
+export $(cat .env | xargs)
+python -c "
+from google.cloud import aiplatform
+from src.constants import PROJECT_ID, REGION
+
+aiplatform.init(project=PROJECT_ID, location=REGION)
+models = aiplatform.Model.list()
+
+for i, model in enumerate(models, 1):
+    print(f'{i}. {model.display_name}')
+    print(f'   Resource: {model.resource_name}')
+    print()
+"
+```
+
+**B. Deploy your model to an endpoint:**
+
+Replace `MODEL_RESOURCE_NAME` with the resource name from step A (e.g., `projects/54825872111/locations/europe-west2/models/9017459897251397632`):
+
+```bash
+source .venv/bin/activate
+export $(cat .env | xargs)
+python scripts/deploy_model.py "MODEL_RESOURCE_NAME"
+```
+
+⏱️ **Deployment takes ~10-15 minutes**
+
+**C. After deployment completes:**
+
+The script will output an **Endpoint ID**. Copy it and update your `.env` file:
+```bash
+GCP_ENDPOINT_ID=your_new_endpoint_id_here
+```
+
+**D. Verify deployment status:**
+```bash
+source .venv/bin/activate
+export $(cat .env | xargs)
+python scripts/check_endpoint_status.py YOUR_ENDPOINT_ID
+```
+
+### Step 6: Test the Endpoint
+
+Once deployed, test the endpoint with a sample mood description:
+
+```bash
+source .venv/bin/activate
+export $(cat .env | xargs)
+python scripts/test_endpoint.py YOUR_ENDPOINT_ID \
   --test-input "Je me sens euphorique après avoir gagné la compétition"
 ```
 
@@ -182,18 +235,35 @@ The project includes a **Chainlit-based web interface** (`src/app/synesthetic_dj
 - **Dynamic lighting animations** rendered as CSS animations with radial gradients and glow effects
 - **Real-time narration** explaining the generated ambiance
 
-### Launch the app:
+### Launch the Chainlit App
+
+**Prerequisites:** Make sure your model is deployed and `GCP_ENDPOINT_ID` is set in `.env`
 
 ```bash
+source .venv/bin/activate
 export $(cat .env | xargs)
-PYTHONPATH=. uv run chainlit run src/app/synesthetic_dj.py
+PYTHONPATH=. chainlit run src/app/synesthetic_dj.py --port 8000
 ```
 
+Then open your browser at: **http://localhost:8000**
+
 The app features:
-- Starter prompts for common moods
-- Immersive lighting overlays synchronized with audio
-- Graceful error handling and loading states
-- Support for both GCS and HTTP audio sources
+- 🎭 Starter prompts for common moods (Bonne humeur, Tristesse, Euphorie, Détente)
+- 🎨 Immersive lighting overlays synchronized with audio
+- 🎵 Audio preview playback from GCS
+- ✨ Graceful error handling and loading states
+- 🔄 Support for both GCS and HTTP audio sources
+
+### Quick Start Commands
+
+After initial setup, use these commands to launch the app:
+
+```bash
+cd "/path/to/llmops_final"
+source .venv/bin/activate
+export $(cat .env | xargs)
+PYTHONPATH=. chainlit run src/app/synesthetic_dj.py --port 8000
+```
 
 ---
 
@@ -261,10 +331,5 @@ The app features:
 
 This project was developed as part of the LLMOps curriculum at Albert School.
 
----
 
-## 👥 Authors
 
-**Enzo Berreur** & **Elea Nizam**
-
-*Albert School - Year 2 | 2025*
