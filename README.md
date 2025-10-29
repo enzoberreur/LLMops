@@ -4,6 +4,7 @@
 
 **Created by:** Enzo Berreur & Elea Nizam
 
+[View slides (PDF)](LLMops_FinalPresentation.pdf)
 ---
 
 ## 📖 Overview
