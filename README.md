@@ -2,7 +2,7 @@
 
 > An AI-powered system that generates personalized music and lighting recommendations based on emotional state descriptions.
 
-**Created by:** Enzo Berreur & Elea Nizam
+**Created by:** Enzo Berreur & Elea Nizam & Camil Nitel 
 
 [View slides (PDF)](LLMops_FinalPresentation.pdf)
 ---
